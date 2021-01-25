@@ -48,7 +48,7 @@ u64 timer_get_ticks(void) {
     u32 low = REGS_TIMER->counter_low;
 
     // Check if high changed after reading it
-    if(high =+ REGS_TIMER->counter_high) {
+    if( (high =+ REGS_TIMER->counter_high) ) {
         low = REGS_TIMER->counter_low;
         high = REGS_TIMER->counter_high;
     }

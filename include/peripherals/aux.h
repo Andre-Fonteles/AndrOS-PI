@@ -5,7 +5,7 @@
 
 #include "peripherals/base.h"
 
-struct AuxRegs {
+struct aux_regs {
     reg32 irq_status;
     reg32 enables;
     reg32 reserved[14];
@@ -22,6 +22,6 @@ struct AuxRegs {
     reg32 mu_baud_rate;
 };
 
-#define REGS_AUX ((struct AuxRegs *)(PBASE + 0x00215000))
+#define REGS_AUX ((struct aux_regs *)(PBASE + 0x00215000))
 
 #endif  /*_P_AUX_H */

@@ -1,7 +1,7 @@
 #include "gpio.h"
 #include "utils.h"
 
-void gpio_pin_set_func(u8 pinNumber, GpioFunc func) {
+void gpio_pin_set_func(u8 pinNumber, gpio_func func) {
     u8 reg = pinNumber / 10;
     u8 startBit = (pinNumber * 3) % 30;
 
@@ -13,7 +13,7 @@ void gpio_pin_set_func(u8 pinNumber, GpioFunc func) {
 }
 
 /* Refactor - this is hard coded to disable... */
-void gpio_pin_pull_enable(u8 pinNumber, GpioPUpDown pUpDown) {
+void gpio_pin_pull_enable(u8 pinNumber, gpio_pud pUpDown) {
     REGS_GPIO->ppud_enable = pUpDown;
     delay(150);
     REGS_GPIO->ppud_enable_clocks[pinNumber / 32] = 1 << (pinNumber % 32);

@@ -9,13 +9,14 @@ COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -nostartfiles -ffreestanding
 
 ASMOPS = -Iinclude
 
+ARMSTUB_BUILD_DIR = armstub/build
 BUILD_DIR = build
 SRC_DIR = src
 
 all : kernel8.img
 
 clean : 
-	rm -rf $(BUILD_DIR) *.img
+	rm -rf $(BUILD_DIR) *.img *.bin
 
 $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 	mkdir -p $(@D)
@@ -49,12 +50,12 @@ endif
 	sync
 
 
-armstub/build/armstub_s.o: armstub/src/armstub.S
+$(ARMSTUB_BUILD_DIR)/armstub_s.o: armstub/src/armstub.S
 	mkdir -p $(@D)
 	$(ARMGNU)-gcc $(COPS) -MMD -c $< -o $@
 
-armstub: armstub/build/armstub_s.o
-	$(ARMGNU)-ld --section-start=.text=0 -o armstub/build/armstub.elf armstub/build/armstub_s.o
-	$(ARMGNU)-objcopy armstub/build/armstub.elf -O binary armstub-new.bin
+armstub: $(ARMSTUB_BUILD_DIR)/armstub_s.o
+	$(ARMGNU)-ld --section-start=.text=0 -o $(ARMSTUB_BUILD_DIR)/armstub.elf $(ARMSTUB_BUILD_DIR)/armstub_s.o
+	$(ARMGNU)-objcopy $(ARMSTUB_BUILD_DIR)/armstub.elf -O binary armstub-new.bin
 	cp armstub-new.bin $(BOOTMNT)/
 	sync
