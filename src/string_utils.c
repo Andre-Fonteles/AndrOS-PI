@@ -1,9 +1,12 @@
-void parse_int(int number, char* str, int base) {
+#include "common.h"
+
+void parse_int(u64 number, char* str, int base) {
     if(base > 36)
         return;
 
     int length = 0;
     while (str[length] != '\0') {
+        str[length] = '0';
         length++;
     }
 

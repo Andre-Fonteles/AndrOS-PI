@@ -24,12 +24,11 @@ master:
     // EL1 will execute at Aarch64; and EL0 and 1 will be "non secure"
     ldr    x0, =SCR_VALUE
     msr    scr_el3, x0
-
     
+    // Configure EL1 to use its own stack and disable interrupts when EL1 
     ldr    x0, =SPSR_VALUE
     msr    spsr_el3, x0
 
-    // Configure EL1 to use its own stack and disable interrupts when EL1 
     adr    x0, el1_entry        
     msr    elr_el3, x0
 
@@ -38,9 +37,9 @@ master:
 el1_entry:
     /* Clean memory from addresses bss_begin to bss_end */
     adr x0, bss_begin
-    adr x1, bss_end
+    ldr x1, =bss_end
     sub x1, x1, x0
-    bl memzero          // Call function to clean memory
+     bl memzero          // Call function to clean memory
 
     mov sp, #LOW_MEMORY // Initialize stack pointer
     bl kernel_main      // Transfer control to kernel_main function

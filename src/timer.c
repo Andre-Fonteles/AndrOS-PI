@@ -3,8 +3,10 @@
 #include "peripherals/aux.h"
 #include "mini_uart.h"
 #include "string_utils.h"
+#include "scheduler.h"
 
-const u32 interval_1 = CLOCKHZ;
+// const u32 interval_1 = 200000;
+const u32 interval_1 = 20 * CLOCKHZ;
 u32 currrent_value_1 = 0;
 
 const u32 interval_3 = CLOCKHZ / 2;
@@ -29,8 +31,8 @@ void handle_timer_1(void)
     currrent_value_1 += interval_1;
     REGS_TIMER->compare[1] = currrent_value_1;
     REGS_TIMER->control_status |= SYS_TIMER_IRQ_1;
-
-    uart_send_string("Timer 1 happened\n");
+    
+    timer_tick();
 }
 
 void handle_timer_3(void)

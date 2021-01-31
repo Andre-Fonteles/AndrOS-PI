@@ -31,10 +31,12 @@ const char *entry_error_messages[] = {
 void handle_invalid_entry_message(u32 type, u64 esr, u64 address) {
 
     uart_send_string("ERROR CAUGHT: ");
-    uart_send_string((char*) entry_error_messages[type]);
-    uart_send_string(" - ");
 
-    char buffType[] = "0000";
+    // uart_send_string("ERROR CAUGHT: ");
+    // uart_send_string((char*) entry_error_messages[type]);
+    // uart_send_string(" - ");
+
+    char buffType[] = "00";
     parse_int(type, buffType, 10);
     uart_send_string(buffType);
 
@@ -53,9 +55,9 @@ void handle_invalid_entry_message(u32 type, u64 esr, u64 address) {
 
 void enable_interrupt_controller(void) {
 #if RPI_VERSION == 4
-    REGS_IRQ->irq0_enable_0 = AUX_IRQ | SYS_TIMER_IRQ_1 | SYS_TIMER_IRQ_3;
+    REGS_IRQ->irq0_enable_0 = SYS_TIMER_IRQ_1;
 #elif RPI_VERSION == 3
-    REGS_IRQ->irq0_enable_1 = AUX_IRQ | SYS_TIMER_IRQ_1 | SYS_TIMER_IRQ_3;
+    REGS_IRQ->irq0_enable_1 = SYS_TIMER_IRQ_1;
 #endif
 }
 

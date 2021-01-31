@@ -4,8 +4,9 @@ BOOTMNT ?= /media/andre/boot
 
 ARMGNU ?= aarch64-linux-gnu
 
+# -g enables debugging
 COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -nostartfiles -ffreestanding \
-	   -Iinclude -mgeneral-regs-only
+	   -Iinclude -mgeneral-regs-only -g
 
 ASMOPS = -Iinclude
 
