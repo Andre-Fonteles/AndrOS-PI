@@ -20,6 +20,18 @@ int copy_process(unsigned long fn, unsigned long arg)
         return 1;
     }
     
+
+	char buff[] = "0000000000000000";
+    parse_int((unsigned long)fn, buff, 16);
+    uart_send_string("fn: ");
+    uart_send_string(buff);
+    uart_send_string("\n");
+
+    parse_int((unsigned long)ret_from_fork, buff, 16);
+    uart_send_string("ret_from_fork: ");
+    uart_send_string(buff);
+    uart_send_string("\n");
+
     // Configure the task struct
     p->priority = current->priority;
     p->state = TASK_RUNNING;

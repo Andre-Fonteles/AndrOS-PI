@@ -11,7 +11,7 @@ void parse_int(u64 number, char* str, int base) {
     }
 
     char remainder;
-    while(number >= 0 && length >= 0) {
+    while(length > 0) {
         length--;
         remainder = (number % base);
         if(remainder > 9) {
