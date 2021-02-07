@@ -26,6 +26,4 @@ cpu_switch_to:
 	ldr	x30, [x8]
 	mov	sp, x9
     
-	mov	x0, x20 /////////////////////////////////////////
-
 	ret							// "Return" to the address in x30 (ret_from_fork function)

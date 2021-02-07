@@ -44,8 +44,6 @@ struct task_struct {
 };
 
 extern void schedule_tail(void);
-extern void init_scheduler(void);
-extern void sched_init(void);
 extern void schedule(void);
 extern void timer_tick(void);
 extern void preempt_disable(void);

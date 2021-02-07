@@ -4,15 +4,11 @@
 #include "mini_uart.h"
 
 static struct task_struct init_task = INIT_TASK;    // The initial kernel_main task
-struct task_struct *current;                        // Current task being executed
-int nr_tasks;                                       // Number of currently running tasks    
-struct task_struct *task[NR_TASKS];                 // Array of all tasks in the system
-
-void init_scheduler(void) {
-    current = &(init_task);
-    task[0] = current;
-    nr_tasks = 1;
-}
+struct task_struct *current = &(init_task);         // Current task being executed
+int nr_tasks = 1;                                   // Number of currently running tasks    
+struct task_struct *task[NR_TASKS] = {              // Array of all tasks in the system
+    &(init_task),
+};
 
 void preempt_disable(void)
 {
@@ -89,6 +85,7 @@ void schedule_tail(void)
 
 void timer_tick(void)
 {
+    // uart_send_string("tic tac");
     --current->counter;
     if (current->counter > 0 || current->preempt_count > 0)
     {

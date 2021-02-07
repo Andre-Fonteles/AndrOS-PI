@@ -26,7 +26,6 @@
 
 #ifndef __ASSEMBLER__
 
-unsigned long get_fun(void);
 void ret_from_fork(void);
 
 #endif

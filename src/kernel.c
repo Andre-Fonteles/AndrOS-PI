@@ -9,7 +9,6 @@
 
 void process(char *array)
 {
-    // schedule_tail();
 	while (1){
 		for (int i = 0; i < 5; i++){
 			uart_send(array[i]);
@@ -20,14 +19,13 @@ void process(char *array)
 
 void kernel_main(void)
 {
-	init_scheduler();
 	uart_init();
 	uart_send_string("\n\nRaspberry PI Bare Metal OS Initializing...\n");
 
 	irq_init_vector();
 	enable_interrupt_controller();
 	enable_irq();
-	init_timer();
+	init_timer(); 
 
 #if RPI_VERSION == 3
     uart_send_string("\tBoard: Raspberry PI 3\n");

@@ -20,19 +20,6 @@ int copy_process(unsigned long fn, unsigned long arg)
         return 1;
     }
     
-
-	char buff[] = "0000000000000000";
-    parse_int((unsigned long)fn, buff, 16);
-    uart_send_string("fn: ");
-    uart_send_string(buff);
-    uart_send_string("\n");
-
-    parse_int((unsigned long)ret_from_fork, buff, 16);
-    uart_send_string("ret_from_fork: ");
-    uart_send_string(buff);
-    uart_send_string("\n");
-
-
     // Configure the task struct
     p->priority = current->priority;
     p->state = TASK_RUNNING;
@@ -40,10 +27,9 @@ int copy_process(unsigned long fn, unsigned long arg)
     p->preempt_count = 1;               //disable preemtion until schedule_tail
     p->cpu_context.x19 = fn;
     p->cpu_context.x20 = arg;
-    p->cpu_context.pc = fn;
-    // p->cpu_context.pc = (unsigned long) &ret_from_fork;
+    p->cpu_context.pc = (unsigned long) &ret_from_fork;
     p->cpu_context.sp = (unsigned long) p + THREAD_SIZE;
-    int pid = nr_tasks++;               // TODO: Better to encapsulate it and call a function. What happens if pid > 64?
+    int pid = nr_tasks++;               // TODO: Better to "encapsulate" it and call a function. What happens if pid > 64?
     task[pid] = p;
 
     // Enables task switching once again.

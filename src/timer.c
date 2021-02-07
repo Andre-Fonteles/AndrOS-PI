@@ -6,7 +6,7 @@
 #include "scheduler.h"
 
 // const u32 interval_1 = 200000;
-const u32 interval_1 = 20 * CLOCKHZ;
+const u32 interval_1 = 2 * CLOCKHZ;
 u32 currrent_value_1 = 0;
 
 const u32 interval_3 = CLOCKHZ / 2;

@@ -153,4 +153,5 @@ err_hang: b err_hang
 ret_from_fork:
 	bl	schedule_tail
 	mov	x0, x20
+
 	blr	x19 		// Branch to the entry function of the task never to return.

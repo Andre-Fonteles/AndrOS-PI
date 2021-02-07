@@ -30,11 +30,11 @@ const char *entry_error_messages[] = {
 
 void handle_invalid_entry_message(u32 type, u64 esr, u64 address) {
 
-    uart_send_string("ERROR CAUGHT: ");
-
     // uart_send_string("ERROR CAUGHT: ");
-    // uart_send_string((char*) entry_error_messages[type]);
-    // uart_send_string(" - ");
+
+    uart_send_string("ERROR CAUGHT: ");
+    uart_send_string((char*) entry_error_messages[type]);
+    uart_send_string(" - ");
 
     char buffType[] = "00";
     parse_int(type, buffType, 10);
