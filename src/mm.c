@@ -4,9 +4,9 @@ static unsigned short mem_map[PAGING_PAGES] = {
     0,
 };
 
-unsigned long get_free_page()
+u64 get_free_page()
 {
-    for (int i = 0; i < PAGING_PAGES; i++)
+    for (unsigned int i = 0; i < PAGING_PAGES; i++)
     {
         if (mem_map[i] == 0)
         {
@@ -17,7 +17,7 @@ unsigned long get_free_page()
     return 0;
 }
 
-void free_page(unsigned long p)
+void free_page(u64 p)
 {
     mem_map[(p - LOW_MEMORY) / PAGE_SIZE] = 0;
 }

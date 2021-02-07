@@ -3,10 +3,10 @@
 #include "string_utils.h"
 #include "mini_uart.h"
 
-static struct task_struct init_task = INIT_TASK;    // The initial kernel_main task
-struct task_struct *current = &(init_task);         // Current task being executed
-int nr_tasks = 1;                                   // Number of currently running tasks    
-struct task_struct *task[NR_TASKS] = {              // Array of all tasks in the system
+static struct task_struct init_task = INIT_TASK; // The initial kernel_main task
+struct task_struct *current = &(init_task);      // Current task being executed
+int nr_tasks = 1;                                // Number of currently running tasks
+struct task_struct *task[NR_TASKS] = {           // Array of all tasks in the system
     &(init_task),
 };
 

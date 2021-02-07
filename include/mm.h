@@ -18,9 +18,11 @@
 
 #ifndef __ASSEMBLER__
 
-unsigned long get_free_page();
-void free_page(unsigned long p);
-void memzero(unsigned long src, unsigned int n);
+#include "common.h"
+
+u64 get_free_page();
+void free_page(u64 p);
+void memzero(u64 src, unsigned int n);
 
 #endif
 

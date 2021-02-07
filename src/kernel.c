@@ -35,12 +35,12 @@ void kernel_main(void)
     uart_send_string("\tBoard: Raspberry PI 4\n");
 #endif
 
-	int res = copy_process((unsigned long)&process, (unsigned long)"12345");
+	int res = copy_process((u64)&process, (u64)"12345");
 	if (res != 0) {
 		uart_send_string("error while starting process 1\n");
 		return;
 	}
-	res = copy_process((unsigned long)&process, (unsigned long)"abcde");
+	res = copy_process((u64)&process, (u64)"abcde");
 	if (res != 0) {
 		uart_send_string("error while starting process 2");
 		return;

@@ -2,9 +2,12 @@
 #include "utils.h"
 #include "peripherals/aux.h"
 #include "mini_uart.h"
+#include "string_utils.h"
 
 #define TXD 14
 #define RXD 15
+
+static char* u64_str_buff = "0000000000000000";
 
 void uart_init(void)
 {
@@ -63,8 +66,8 @@ void uart_send_string(char *str)
     }
 }
 
-// This function is required by printf function
-void putc(void *p, char c)
-{
-    uart_send(c);
+void uart_print_u64(u64 value, int base) {
+    parse_int(value, u64_str_buff, base);
+    uart_send_string(u64_str_buff);
+    uart_send_string("\n");
 }

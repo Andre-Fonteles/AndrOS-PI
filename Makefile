@@ -6,7 +6,7 @@ ARMGNU ?= aarch64-linux-gnu
 
 # -g enables debugging
 COPS = -DRPI_VERSION=$(RPI_VERSION) -Wall -nostdlib -nostartfiles -ffreestanding \
-	   -Iinclude -mgeneral-regs-only -g
+	   -Iinclude -mgeneral-regs-only -g -Wextra
 
 ASMOPS = -Iinclude
 

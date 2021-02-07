@@ -5,6 +5,8 @@
 
 #ifndef __ASSEMBLER__
 
+#include "common.h"
+
 #define THREAD_SIZE 4096
 
 #define NR_TASKS 64							// We currently accept a max of 64 tasks.
@@ -19,19 +21,19 @@ extern struct task_struct * task[NR_TASKS];
 extern int nr_tasks;
 
 struct cpu_context {
-	unsigned long x19;
-	unsigned long x20;
-	unsigned long x21;
-	unsigned long x22;
-	unsigned long x23;
-	unsigned long x24;
-	unsigned long x25;
-	unsigned long x26;
-	unsigned long x27;
-	unsigned long x28;
-	unsigned long fp;
-	unsigned long sp;
-	unsigned long pc;
+	u64 x19;
+	u64 x20;
+	u64 x21;
+	u64 x22;
+	u64 x23;
+	u64 x24;
+	u64 x25;
+	u64 x26;
+	u64 x27;
+	u64 x28;
+	u64 fp;
+	u64 sp;
+	u64 pc;
 };
 
 // This struct represents a process.
